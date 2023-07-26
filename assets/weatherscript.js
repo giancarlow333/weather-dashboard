@@ -20,13 +20,12 @@ var geocodeQueryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city +
 console.log(city);
 console.log(geocodeQueryURL);
 
-var buttonClickHandler = function () {
+var buttonClickHandler = function (event) {
+    event.preventDefault();
     console.log("HELLO!");
     fetch(geocodeQueryURL).then(function (response) {
         response.json().then(function (data) {
-            console.log(data[1].name);
-            console.log(data[1].lat);
-            console.log(data[1].lon);
+            console.log(data);
         });
     });
 };
