@@ -1,3 +1,5 @@
+var buttonElt = document.querySelector('#search-btn');
+
 var APIKey = "572862b5623017184deb426aa65b7d48";
 var city;
 var latitude;
@@ -6,7 +8,7 @@ var queryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude 
 
 // https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys
 
-fetch(queryURL);
+//fetch(queryURL);
 
 /* Fetch location data
  * Uses geocoding API
@@ -14,15 +16,22 @@ fetch(queryURL);
  */
 var geocodeQueryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
 
-fetch(geocodeQueryURL)
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data.name);
-        console.log(data.lat);
-        console.log(data.lon);
-    });
+
 
 city = "Los Angeles";
 console.log(city);
+
+function buttonClickHandler() {
+    console.log("HELLO!");
+    fetch(geocodeQueryURL)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data.name);
+            console.log(data.lat);
+            console.log(data.lon);
+        });
+};
+
+buttonElt.addEventListener('click', buttonClickHandler());
