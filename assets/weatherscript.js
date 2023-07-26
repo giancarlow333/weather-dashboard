@@ -14,24 +14,21 @@ var queryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude 
  * Uses geocoding API
  * (https://openweathermap.org/api/geocoding-api)
  */
-var geocodeQueryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
+city = "Los Angeles"; // for testing
+var geocodeQueryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=" + APIKey;
 
-
-
-city = "Los Angeles";
 console.log(city);
+console.log(geocodeQueryURL);
 
-function buttonClickHandler() {
+var buttonClickHandler = function () {
     console.log("HELLO!");
-    fetch(geocodeQueryURL)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            console.log(data.name);
-            console.log(data.lat);
-            console.log(data.lon);
+    fetch(geocodeQueryURL).then(function (response) {
+        response.json().then(function (data) {
+            console.log(data[1].name);
+            console.log(data[1].lat);
+            console.log(data[1].lon);
         });
+    });
 };
 
-buttonElt.addEventListener('click', buttonClickHandler());
+buttonElt.addEventListener('click', buttonClickHandler);
