@@ -32,10 +32,14 @@ var buttonClickHandler = function (event) {
     });
 };
 
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
+var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
 
 buttonElt.addEventListener('click', buttonClickHandler);
 
-function fetchSearchedCityWeather (name) {
-    return name;
-}
+var fetchSearchedCityWeather = function () {
+    fetch(weatherQueryURL).then(function (response) {
+        response.json().then(function (data) {
+            console.log(data);
+        });
+    });
+};
