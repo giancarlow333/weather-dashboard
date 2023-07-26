@@ -37,9 +37,9 @@ var buttonClickHandler = function (event) {
 
 buttonElt.addEventListener('click', buttonClickHandler);
 
-function fetchSearchedCityWeather () {
+async function fetchSearchedCityWeather () {
     var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
-    fetch(weatherQueryURL).then(function (response) {
+    await fetch(weatherQueryURL).then(function (response) {
         response.json().then(function (data) {
             console.log(data);
         });
