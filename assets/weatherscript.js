@@ -4,7 +4,7 @@ var APIKey = "572862b5623017184deb426aa65b7d48";
 var city;
 var latitude;
 var longitude;
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
+var APIname;
 
 // https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys
 
@@ -25,11 +25,17 @@ var buttonClickHandler = function (event) {
     console.log("HELLO!");
     fetch(geocodeQueryURL).then(function (response) {
         response.json().then(function (data) {
-            console.log(data[0].name);
-            console.log(data[0].lat);
-            console.log(data[0].lon);
+            APIname = data[0].name;
+            latitude = data[0].lat;
+            longitude = data[0].lon;
         });
     });
 };
 
+var queryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
+
 buttonElt.addEventListener('click', buttonClickHandler);
+
+function fetchSearchedCityWeather (name) {
+    return name;
+}
