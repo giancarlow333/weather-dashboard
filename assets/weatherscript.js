@@ -20,23 +20,24 @@ var geocodeQueryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city +
 console.log(city);
 console.log(geocodeQueryURL);
 
-var buttonClickHandler = function (event) {
+async function buttonClickHandler(event) {
     event.preventDefault();
     console.log("HELLO!");
-    fetch(geocodeQueryURL).then(function (response) {
+    await fetch(geocodeQueryURL).then(function (response) {
         response.json().then(function (data) {
             APIname = data[0].name;
             latitude = data[0].lat;
             longitude = data[0].lon;
             console.log("Call#1: ", longitude);
         });
-    }).then(() => {
-        console.log("Call#2: ", longitude);
-        var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
-        fetch(weatherQueryURL).then(function (response) {
-            response.json().then(function (data) {
-                console.log(data);
-            });
+    });
+    
+    console.log("Call#2: ", longitude);
+    var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
+    await fetch(weatherQueryURL).then(function (response) {
+        response.json().then(function (data) {
+            console.log(data);
+            console.log("Call#3: ", longitude);
         });
     });
 };
