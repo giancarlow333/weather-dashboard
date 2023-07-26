@@ -28,15 +28,17 @@ var buttonClickHandler = function (event) {
             APIname = data[0].name;
             latitude = data[0].lat;
             longitude = data[0].lon;
+            console.log("Call#1: ", longitude);
         });
     });
+    console.log("Call#2: ", longitude);
+    fetchSearchedCityWeather();
 };
-
-var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
 
 buttonElt.addEventListener('click', buttonClickHandler);
 
-var fetchSearchedCityWeather = function () {
+function fetchSearchedCityWeather () {
+    var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
     fetch(weatherQueryURL).then(function (response) {
         response.json().then(function (data) {
             console.log(data);
