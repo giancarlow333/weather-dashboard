@@ -15,7 +15,7 @@ var queryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude 
  * (https://openweathermap.org/api/geocoding-api)
  */
 city = "Los Angeles"; // for testing
-var geocodeQueryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=" + APIKey;
+var geocodeQueryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIKey;
 
 console.log(city);
 console.log(geocodeQueryURL);
@@ -25,7 +25,9 @@ var buttonClickHandler = function (event) {
     console.log("HELLO!");
     fetch(geocodeQueryURL).then(function (response) {
         response.json().then(function (data) {
-            console.log(data);
+            console.log(data[0].name);
+            console.log(data[0].lat);
+            console.log(data[0].lon);
         });
     });
 };
