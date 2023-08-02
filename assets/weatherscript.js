@@ -31,6 +31,18 @@ async function buttonClickHandler(event) {
         response.json().then(function (data) {
             console.log(data);
             // Store pertinent results into local storage
+            var cityName = data.name;
+            var currentTemp = data.main.temp;
+            var currentWind = data.wind.speed;
+            var currentHumidity = data.main.humidity;
+            var returnObject = {
+                "city": cityName,
+                "temperature": (currentTemp - 273.15) * 1.8 + 32,
+                "wind": currentWind / 1.609,
+                "humidity": currentHumidity
+            };
+            var JSONResults = JSON.stringify(returnObject);
+            localStorage.setItem(cityName, JSONResults);
         });
     });
 };
