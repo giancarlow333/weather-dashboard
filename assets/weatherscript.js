@@ -6,6 +6,7 @@ var latitude;
 var longitude;
 var APIname;
 var weatherQueryURL;
+var dashboardElt = document.getElementById("main-dashboard");
 
 /* Fetch location data
  * Uses geocoding API
@@ -25,7 +26,7 @@ async function buttonClickHandler(event) {
         });
     });
     
-    weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
+    weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial";
     
     await fetch(weatherQueryURL).then(function (response) {
         response.json().then(function (data) {
@@ -37,12 +38,26 @@ async function buttonClickHandler(event) {
             var currentHumidity = data.main.humidity;
             var returnObject = {
                 "city": cityName,
-                "temperature": (currentTemp - 273.15) * 1.8 + 32,
-                "wind": currentWind / 1.609,
+                "temperature": currentTemp,
+                "wind": currentWind,
                 "humidity": currentHumidity
             };
             var JSONResults = JSON.stringify(returnObject);
             localStorage.setItem(cityName, JSONResults);
+
+            // put them on the screen
+            var cityNameElt = document.createElement("h1");
+            var temperatureElt = document.createElement("p");
+            var windElt = document.createElement("p");
+            var humidityElt = document.createElement("p");
+            cityNameElt.textContent = cityName;
+            temperatureElt.textContent = currentTemp + " F";
+            windElt.textContent = currentWind + " MPH";
+            humidityElt.textContent = currentHumidity + "%";
+            dashboardElt.append(cityNameElt);
+            dashboardElt.append(temperatureElt);
+            dashboardElt.append(windElt);
+            dashboardElt.append(humidityElt);
         });
     });
 };
