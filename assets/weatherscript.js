@@ -36,11 +36,14 @@ async function buttonClickHandler(event) {
             var currentTemp = data.main.temp;
             var currentWind = data.wind.speed;
             var currentHumidity = data.main.humidity;
+            var currentConditions = data.weather[0].icon;
+            console.log(currentConditions);
             var returnObject = {
                 "city": cityName,
                 "temperature": currentTemp,
                 "wind": currentWind,
-                "humidity": currentHumidity
+                "humidity": currentHumidity,
+                "conditions": currentConditions
             };
             var JSONResults = JSON.stringify(returnObject);
             localStorage.setItem(cityName, JSONResults);
@@ -51,14 +54,20 @@ async function buttonClickHandler(event) {
             var temperatureElt = document.createElement("p");
             var windElt = document.createElement("p");
             var humidityElt = document.createElement("p");
+            var iconImageElt = document.createElement("img");
 
             currentConditionsElt.classList.add("p-1");
             currentConditionsElt.classList.add("border");
             currentConditionsElt.classList.add("border-black");
 
+            iconImageElt.setAttribute("src", "https://openweathermap.org/img/wn/" + currentConditions + "@2x.png");
+            iconImageElt.setAttribute("width", "24");
+            iconImageElt.setAttribute("style", "display: inline;");
+
             cityNameElt.textContent = cityName + " (Now)";
             cityNameElt.classList.add("text-2xl");
             cityNameElt.classList.add("font-bold");
+            cityNameElt.append(iconImageElt);
 
             temperatureElt.textContent = currentTemp + " °F";
             windElt.textContent = currentWind + " MPH";

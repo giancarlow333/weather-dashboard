@@ -7,3 +7,5 @@
 * CSS styles are courtesy [Tailwind CSS](https://tailwindcss.com).  I consulted [this StackOverflow thread](https://stackoverflow.com/questions/67242334/tailwind-css-how-to-make-a-grid-with-two-columns-where-the-1st-column-has-20) about grid layouts using columns of unequal size.
 
 https://www.w3schools.com/howto/howto_js_add_class.asp
+https://openweathermap.org/forecast5
+https://openweathermap.org/weather-conditions
