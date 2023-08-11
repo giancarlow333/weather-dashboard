@@ -46,18 +46,30 @@ async function buttonClickHandler(event) {
             localStorage.setItem(cityName, JSONResults);
 
             // put them on the screen
+            var currentConditionsElt = document.createElement("section");
             var cityNameElt = document.createElement("h1");
             var temperatureElt = document.createElement("p");
             var windElt = document.createElement("p");
             var humidityElt = document.createElement("p");
-            cityNameElt.textContent = cityName;
-            temperatureElt.textContent = currentTemp + " F";
+
+            currentConditionsElt.classList.add("p-1");
+            currentConditionsElt.classList.add("border");
+            currentConditionsElt.classList.add("border-black");
+
+            cityNameElt.textContent = cityName + " (Now)";
+            cityNameElt.classList.add("text-2xl");
+            cityNameElt.classList.add("font-bold");
+
+            temperatureElt.textContent = currentTemp + " °F";
             windElt.textContent = currentWind + " MPH";
             humidityElt.textContent = currentHumidity + "%";
-            dashboardElt.append(cityNameElt);
-            dashboardElt.append(temperatureElt);
-            dashboardElt.append(windElt);
-            dashboardElt.append(humidityElt);
+            currentConditionsElt.append(cityNameElt);
+            currentConditionsElt.append(temperatureElt);
+            currentConditionsElt.append(windElt);
+            currentConditionsElt.append(humidityElt);
+            dashboardElt.append(currentConditionsElt);
+
+            // add five-day forecast
         });
     });
 };
